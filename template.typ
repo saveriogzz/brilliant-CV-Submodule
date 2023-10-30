@@ -326,7 +326,7 @@
   }
 }
 
-#let cvSection(title, highlighted: true, letters: 3) = {
+#let cvSection(title, highlighted: false, letters: 3) = {
   let highlightText = title.slice(0,letters)
   let normalText = title.slice(letters)
 
