@@ -73,7 +73,7 @@
   }
 }
 
-#let beforeSectionSkip = 1pt
+#let beforeSectionSkip = 3pt
 #let beforeEntrySkip = 1pt
 #let beforeEntryDescriptionSkip = 1pt
 
@@ -203,7 +203,7 @@
 )}
 
 #let footerStyle(str) = {text(
-  size: 8pt,
+  size: 7.5pt,
   fill: rgb("#999999"),
   smallcaps(str)
 )}
@@ -389,7 +389,7 @@
     )
   )
   entryDescriptionStyle(description)
-  entryTagListStyle(tags)
+  align(left, entryTagListStyle(tags))
 }
 
 #let cvSkill(
@@ -411,10 +411,11 @@
   date: "1990",
   title: "Title",
   issuer: "",
+  online: "",
   location: ""
 ) = {
   table(
-    columns: (16%, 1fr, 15%),
+    columns: (10%, 1fr, 15%),
     inset: 0pt,
     column-gutter: 10pt,
     align: horizon,
@@ -422,9 +423,11 @@
     honorDateStyle(date),
     if issuer == "" {
       honorTitleStyle(title)
-    } else [
+    } else if link != "" { [
+      #honorTitleStyle(link(online)[#title]), #honorIssuerStyle(issuer)
+    ] } else { [
       #honorTitleStyle(title), #honorIssuerStyle(issuer)
-    ],
+    ]},
     honorLocationStyle(location)
   )
   v(-6pt)
@@ -447,13 +450,7 @@
 #let cvFooter() = {
   place(
     bottom,
-    table(
-      columns: (1fr, auto),
-      inset: 0pt,
-      stroke: none,
-      footerStyle([#firstName #lastName]),
       footerStyle(languageSwitch(cvFooterInternational)),
-    )
   )
 }
 
@@ -502,7 +499,7 @@
   set text(
     font: fontList,
     weight: "regular",
-    size: 9pt,
+    size: 10pt,
   )
   set align(left)
   set page(
